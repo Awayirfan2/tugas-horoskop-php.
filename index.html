@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Horoskop Sederhana - Anwar</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; max-width: 600px; margin: 40px auto; background: #f8f9fa; }
+        h1 { color: #333; }
+        form { margin: 30px 0; }
+        input, button { padding: 12px; font-size: 16px; margin: 5px; }
+        button { background: #007bff; color: white; border: none; border-radius: 5px; cursor: pointer; }
+        .hasil { background: #e0f7fa; padding: 25px; border-radius: 10px; margin-top: 30px; }
+    </style>
+</head>
+<body>
+    <h1>Cek Zodiakmu Sekarang!</h1>
+    <form id="formZodiak">
+        <label>Masukkan Tanggal Lahir:</label><br><br>
+        <input type="date" id="tgl_lahir" required>
+        <br><br>
+        <button type="submit">Cek Zodiak</button>
+    </form>
+
+    <div id="hasil" class="hasil" style="display: none;"></div>
+
+    <script>
+        const form = document.getElementById('formZodiak');
+        const hasilDiv = document.getElementById('hasil');
+
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const inputDate = document.getElementById('tgl_lahir').value;
+            if (!inputDate) return;
+
+            const date = new Date(inputDate);
+            const day = date.getDate();
+            const month = date.getMonth() + 1;
+
+            let zodiak = "";
+            let sifat = "";
+
+            if ((month === 3 && day >= 21) || (month === 4 && day <= 19)) { zodiak = "Aries"; sifat = "Berani, energik, suka memimpin, impulsif."; }
+            else if ((month === 4 && day >= 20) || (month === 5 && day <= 20)) { zodiak = "Taurus"; sifat = "Setia, sabar, suka kenyamanan, keras kepala."; }
+            else if ((month === 5 && day >= 21) || (month === 6 && day <= 20)) { zodiak = "Gemini"; sifat = "Cerdas, komunikatif, adaptable, gampang bosan."; }
+            else if ((month === 6 && day >= 21) || (month === 7 && day <= 22)) { zodiak = "Cancer"; sifat = "Perhatian, emosional, protektif, moody."; }
+            else if ((month === 7 && day >= 23) || (month === 8 && day <= 22)) { zodiak = "Leo"; sifat = "Percaya diri, dermawan, karismatik."; }
+            else if ((month === 8 && day >= 23) || (month === 9 && day <= 22)) { zodiak = "Virgo"; sifat = "Detail, praktis, analitis, perfeksionis."; }
+            else if ((month === 9 && day >= 23) || (month === 10 && day <= 22)) { zodiak = "Libra"; sifat = "Adil, sosial, harmonis, susah memutuskan."; }
+            else if ((month === 10 && day >= 23) || (month === 11 && day <= 21)) { zodiak = "Scorpio"; sifat = "Intens, misterius, penuh gairah."; }
+            else if ((month === 11 && day >= 22) || (month === 12 && day <= 21)) { zodiak = "Sagittarius"; sifat = "Petualang, optimis, jujur."; }
+            else if ((month === 12 && day >= 22) || (month === 1 && day <= 19)) { zodiak = "Capricorn"; sifat = "Disiplin, ambisius, bertanggung jawab."; }
+            else if ((month === 1 && day >= 20) || (month === 2 && day <= 18)) { zodiak = "Aquarius"; sifat = "Inovatif, independen, humanis."; }
+            else if ((month === 2 && day >= 19) || (month === 3 && day <= 20)) { zodiak = "Pisces"; sifat = "Imajinatif, empati tinggi, romantis."; }
+
+            hasilDiv.innerHTML = `
+                <h2>Zodiak: ${zodiak}</h2>
+                <p><strong>Sifat dasar:</strong> ${sifat}</p>
+                <p>Tanggal lahir: ${date.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+            `;
+            hasilDiv.style.display = "block";
+        });
+    </script>
+</body>
+</html>
